@@ -1,0 +1,8 @@
+{
+    "name": "buildrr/localbitcoins",
+    "autoload": {
+        "psr-0" : {
+            "Buildrr\\LocalBitcoins" : "src"
+        }
+    }
+}
