@@ -1,5 +1,5 @@
 <?php
-namespace LocalBitcoins;
+namespace Buildrr\LocalBitcoins;
 
 //Put them to true after tests.
 define('SSL_VERIFYPEER',false);
@@ -14,8 +14,8 @@ class LocalBitcoins {
 
 	public function Query($url,$post=array(),$get=array(),$search=array(),$replace=array()) {
 
-		if(!defined('SSL_VERIFYPEER'))		define('SSL_VERIFYPEER',true);
-		if(!defined('SSL_VERIFYHOST'))		define('SSL_VERIFYHOST',true);
+		if(!defined('SSL_VERIFYPEER'))	define('SSL_VERIFYPEER',true);
+		if(!defined('SSL_VERIFYHOST'))	define('SSL_VERIFYHOST',true);
 
 		// Method
 		$api_get 	= array('/api/ads/','/api/ad-get/{ad_id}/','/api/ad-get/','/api/payment_methods/','/api/payment_methods/{countrycode}/','/api/countrycodes/','/api/currencies/','/api/places/','/api/contact_messages/{contact_id}/','/api/contact_info/{contact_id}/','/api/contact_info/','/api/account_info/{username}','/api/dashboard/','/api/dashboard/released/','/api/dashboard/canceled/','/api/dashboard/closed/','/api/myself/','/api/notifications/','/api/real_name_verifiers/{username}/','/api/recent_messages/','/api/wallet/','/api/wallet-balance/','/api/wallet-addr/','/api/merchant/invoices/','/api/merchant/invoice/{invoice_id}/');
