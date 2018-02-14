@@ -7,6 +7,9 @@ define('SSL_VERIFYHOST',false);
 
 class LocalBitcoins {
 
+	private $error = null;
+	private $data = null;
+
 	public function __construct($API_AUTH_KEY=null,$API_AUTH_SECRET=null) {
 		$this->API_AUTH_KEY 	= $API_AUTH_KEY ? $API_AUTH_KEY : LBC_API_AUTH_KEY;
 		$this->API_AUTH_SECRET 	= $API_AUTH_SECRET ? $API_AUTH_SECRET : LBC_API_AUTH_SECRET;
@@ -86,9 +89,50 @@ class LocalBitcoins {
 			throw new Exception('Could not get reply: '.curl_error($ch));
 
 		// return result
-		return json_decode($res);
+		$result = json_decode($res);
+
+		if(isset($result->error))	{
+			$this->setError($result->error);
+		}
+
+		if(isset($result->data))	{
+			$this->setData($result->data);
+		}
+	}
+
+	function setData($data)	{
+		return $this->data = $data;
+	}
+
+	function getData()	{
+		return $this->data;
+	}
+
+	function setError($error)	{
+		$this->error = $error;
+	}
+
+	function getError()	{
+		return $this->error;
+	}
+
+	function isBuying()	{
+		if(isset($this->data) && isset($this->data->is_buying))
+		return $this->data->is_buying;
+		return false;
+	}
+
+	function isSelling()	{
+		if(isset($this->data) && isset($this->data->is_selling))
+		return $this->data->is_selling;
+		return false;
 	}
 }
+
+//Parent Class "LocalBitcoins" Ends
+
+//Child Class "LocalBitcoins_Advertisements_API" Starts
+
 class LocalBitcoins_Advertisements_API extends LocalBitcoins {
 
 	public function __construct($API_AUTH_KEY=null,$API_AUTH_SECRET=null) {
